@@ -89,7 +89,7 @@
         </div>
       </div>
       <button
-        :class="activateButton"
+        :class="checkActive"
         class="basic-button"
         @click="addNewProduct"
       >
@@ -111,8 +111,7 @@ export default {
         description: '',
         imgUrl: '',
         price: ''
-      },
-      activeButton: false
+      }
     }
   },
   validations: {
@@ -129,20 +128,9 @@ export default {
     }
   },
   computed: {
-    activateButton () {
+    checkActive () {
       return {
-        'active-button': this.activeButton,
-        'basic-button': !this.activeButton
-      }
-    }
-  },
-  watch: {
-    activeButton: () {
-      this.$v.$touch()
-      if (!this.$v.invalid) {
-        this.activeButton = true
-      } else {
-        this.activeButton = false
+        'active-button': !this.$v.product.price.$error && this.$v.product.price.$dirty && !this.$v.product.imgUrl.$error && this.$v.product.imgUrl.$dirty && !this.$v.product.name.$error && this.$v.product.name.$dirty
       }
     }
   },
@@ -158,6 +146,7 @@ export default {
           price: ''
         }
       }
+      this.$v.$reset()
     }
   }
 }
@@ -168,6 +157,7 @@ export default {
     background: #FFFEFB;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
+    height: 435px;
   }
 
   .basic-container {

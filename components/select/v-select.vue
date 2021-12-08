@@ -3,7 +3,7 @@
     <div
       class="title"
       :class="getBorder"
-      @click="areOptionsVisible = !areOptionsVisible"
+      @click="areOptionsVisible = true"
     >
       {{ placeholder }}
       <img
@@ -54,26 +54,27 @@ export default {
       }
     }
   },
-  // mounted () {
-  //   document.addEventListener('click', this.hideSelect.bind(this), true)
-  // },
-  // beforeDestroy () {
-  //   document.removeEventListener('click', this.hideSelect)
-  // },
+  mounted () {
+    document.addEventListener('click', this.hideSelect.bind(this), true)
+  },
+  beforeDestroy () {
+    document.removeEventListener('click', this.hideSelect)
+  },
   methods: {
     selected (option) {
       this.$emit('selected', option)
       this.areOptionsVisible = false
+    },
+    hideSelect () {
+      this.areOptionsVisible = false
     }
-    // hideSelect () {
-    //   this.areOptionsVisible = false
-    // }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .v-select {
+    background: #fff;
     cursor: pointer;
     position: relative;
     width: 122px;
@@ -98,6 +99,7 @@ export default {
   }
 
   .options {
+    background: #fff;
     position: absolute;
     top: 35px;
     right: 0;

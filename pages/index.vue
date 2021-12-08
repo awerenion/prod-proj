@@ -106,7 +106,9 @@ export default {
   }
 
   .main__form {
+    position: sticky;
     width: 332px;
-    margin-right: 16px;
+    top: 16px;
   }
+
 </style>
